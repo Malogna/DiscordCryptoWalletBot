@@ -44,7 +44,11 @@ class MyClient(discord.Client):
                     addressbruh = addressyes[addressyes.index('??wallet') + 1]
                     currencythingy = addressyes[addressyes.index(addressbruh) + 1]
                     pricegrab(addressbruh, currencythingy)
-                    await message.channel.send("**SFM Wallet Address:** {} \n**SFM Wallet Balance:** {} SAFEMOON **\nSFM Wallet Balance in {}:** {} {}".format(str(addressbruh), int(example2), str(currencythingy.upper()), int(sfmwalletbalanceincurfinal), str(currencythingy.upper())))
+                    embedVar = discord.Embed(title="**SFM Wallet Address:**", description=str(addressbruh), color=0x0000FF)
+                    embedVar.add_field(name="**SFM Wallet Balance:**", value=("{} {}".format(int(example2), "SAFEMOON")), inline=False)
+                    embedVar.add_field(name="**SFM Wallet Balance in {}:**".format(str(currencythingy.upper())), value=("{} {}".format(int(sfmwalletbalanceincurfinal), str(currencythingy.upper()))), inline=False)
+                    msgsent = await message.channel.send(embed=embedVar)
+                    await msgsent.add_reaction("\N{ROCKET}")
                 except IndexError:
                     await message.channel.send("**You forgot to specify a currency to convert the SFM into!**")
                 except KeyError:
@@ -56,12 +60,14 @@ class MyClient(discord.Client):
                 addressyes = message.content.split()
                 currencythingy = addressyes[addressyes.index("??price") + 1]
                 priceget(currencythingy)
-                await message.channel.send("{} {}".format(curpriceformat, currencythingy.upper()))
+                msgsent = await message.channel.send("{} {}".format(curpriceformat, currencythingy.upper()))
+                await msgsent.add_reaction("\N{ROCKET}")
             except IndexError:
                 priceget("usd")
-                await message.channel.send("{}{}".format(curpriceformat, " USD"))
+                msgsent = await message.channel.send("{}{}".format(curpriceformat, " USD"))
+                await msgsent.add_reaction("\N{ROCKET}")
             except KeyError:
                 await message.channel.send("**The Currency you specified was invalid! Check your spelling and try again. You're dumber than Fabian bro**")
 print("Ready!")
 client = MyClient()
-client.run(TOKEN)
+client.run(TOKENGOESHERE)
