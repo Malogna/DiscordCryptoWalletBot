@@ -64,4 +64,4 @@ class MyClient(discord.Client):
                 await message.channel.send("**The Currency you specified was invalid! Check your spelling and try again. You're dumber than Fabian bro**")
 print("Ready!")
 client = MyClient()
-client.run('ODEzNDE2MzI5NzI1NDc2OTE1.YDO-_Q.xWSwmkfHxSufFDXWEyt43tBwPdo')
+client.run(TOKEN)
